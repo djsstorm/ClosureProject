@@ -36,6 +36,42 @@ namespace Closure2.Controllers
             return View(productmodels);
         }
 
+        public ActionResult PostsAndComments(int id = 0)
+        {
+            var postsres = from posts in db.Posts
+                           join comments in db.Comments on posts.ID equals comments.postId into Inners
+                           from i in Inners.DefaultIfEmpty()
+                           select new PostsAndComments { postText = posts.text, commentText = i.text, prodId = posts.prodId };
+            postsres = postsres.Where(s => s.prodId == id);
+            if (postsres == null)
+            {
+                return HttpNotFound();
+            }
+            return View(postsres);
+        }
+
+        public ActionResult NumberOfComments(int id = 0)
+        {
+          /*  var postsres = from posts in db.Posts
+                           join comments in db.Comments on posts.ID equals comments.postId into t
+                           from x in t group x by new { posts.ID, x.text, posts.prodId } into g
+                           select new CommentsAmounts { postText = g.Key.text, commentsAmount = g.Count(), prodId = g.Key.prodId };
+            */
+
+            var query = from posts in db.Posts
+                        join comments in db.Comments on posts.ID equals comments.postId into gj
+                        from subc in gj.DefaultIfEmpty()
+                        group subc by new { posts.ID, posts.text, posts.prodId, subc.postId} into g
+                        select new CommentsAmounts { postText = g.Key.text, commentsAmount = g.Key.postId == null ? 0 : g.Count(), prodId = g.Key.prodId };
+
+            query = query.Where(p => p.prodId == id);
+            if (query == null)
+            {
+                return HttpNotFound();
+            }
+            return View(query);
+        }
+
         //
         // GET: /Product/Create
 

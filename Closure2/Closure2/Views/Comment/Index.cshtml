@@ -9,6 +9,20 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+<h2>Search a post</h2>
+
+<p>
+    @using (Html.BeginForm("Search","Comment",FormMethod.Get))
+    {
+        <p>
+            Text: @Html.TextBox("text")<br />
+            Date: @Html.TextBox("date","1-1-14","mm-dd-yy");
+            <input type="submit" value="Filter" />
+        </p>
+    }
+</p>
+
 <table>
     <tr>
         <th>

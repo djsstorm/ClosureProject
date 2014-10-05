@@ -162,6 +162,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BranchController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostController.cs" />
@@ -178,12 +179,23 @@
     <Compile Include="Migrations\201410021926031_changedParam.Designer.cs">
       <DependentUpon>201410021926031_changedParam.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410051044466_addedBranch.cs" />
+    <Compile Include="Migrations\201410051044466_addedBranch.Designer.cs">
+      <DependentUpon>201410051044466_addedBranch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410051120429_ChangedCoordToFloat.cs" />
+    <Compile Include="Migrations\201410051120429_ChangedCoordToFloat.Designer.cs">
+      <DependentUpon>201410051120429_ChangedCoordToFloat.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Branch.cs" />
     <Compile Include="Models\ClosureDbContext.cs" />
     <Compile Include="Models\CommentModels.cs" />
+    <Compile Include="Models\CommentsAmounts.cs" />
     <Compile Include="Models\PostModels.cs" />
+    <Compile Include="Models\PostsAndComments.cs" />
+    <Compile Include="Models\PostsStatistics.cs" />
     <Compile Include="Models\ProductModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -342,6 +354,17 @@
     <Content Include="Views\Comment\Edit.cshtml" />
     <Content Include="Views\Comment\Delete.cshtml" />
     <Content Include="Views\Post\Search.cshtml" />
+    <Content Include="Views\Branch\Index.cshtml" />
+    <Content Include="Views\Branch\Details.cshtml" />
+    <Content Include="Views\Branch\Create.cshtml" />
+    <Content Include="Views\Branch\Edit.cshtml" />
+    <Content Include="Views\Branch\Delete.cshtml" />
+    <Content Include="Views\Post\First.cshtml" />
+    <Content Include="Views\Comment\Search.cshtml" />
+    <Content Include="Views\Product\PostsAndComments.cshtml" />
+    <Content Include="Views\Product\NumberOfComments.cshtml" />
+    <Content Include="Views\Account\ViewStatistics.cshtml" />
+    <Content Include="Views\Account\data.tsv" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -355,6 +378,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410021926031_changedParam.resx">
       <DependentUpon>201410021926031_changedParam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410051044466_addedBranch.resx">
+      <DependentUpon>201410051044466_addedBranch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410051120429_ChangedCoordToFloat.resx">
+      <DependentUpon>201410051120429_ChangedCoordToFloat.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -371,11 +400,13 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>3197</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:1796/</IISUrl>
+          <IISUrl>http://localhost:55555/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:55555/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -81,6 +81,17 @@ namespace Closure2.Controllers
             return View(commentmodels);
         }
 
+        public ActionResult Search(DateTime? date, string text = "")
+        {
+            var postsres = from m in db.Comments select m;
+            if (!String.IsNullOrEmpty(text))
+                postsres = postsres.Where(s => s.text.Contains(text));
+            if (date != null)
+                postsres = postsres.Where(s => s.commentDate >= date);
+
+            return View(postsres);
+        }
+
         //
         // POST: /Comment/Edit/5
 

@@ -11,14 +11,17 @@ namespace Closure2.Controllers
 {
     public class PostController : Controller
     {
-        static readonly DateTime dt = DateTime.Now;
         private ClosureDbContext db = new ClosureDbContext();
 
         //
         // GET: /Post/
 
         public ActionResult Index()
-        {
+        {   
+            var GenreLst = new List<int>();
+            for (int i = 1; i < 6; i++)
+                GenreLst.Add(i);
+            ViewBag.rating = new SelectList(GenreLst);
             if (db.Posts == null)
                 return View();
             return View(db.Posts.ToList());
@@ -102,13 +105,9 @@ namespace Closure2.Controllers
 
         //
         // GET: /Post/Search
-        
-        public ActionResult Search(DateTime date, int rating = 0, string text = "")
-        {
-            var GenreLst = new List<int>();
-            for (int i = 1; i < 6; i++)
-                GenreLst.Add(i);
-            ViewBag.rating = new SelectList(GenreLst);
+
+        public ActionResult Search(DateTime? date, int rating = 0, string text = "")
+        {          
 
             var postsres = from m in db.Posts select m;
             if (!String.IsNullOrEmpty(text))
@@ -119,6 +118,16 @@ namespace Closure2.Controllers
                 postsres = postsres.Where(s => s.rating >= rating);
 
             return View(postsres);
+        }
+
+        public ActionResult First(int id = 0)
+        {
+            if (id == 0)
+                return View();
+            var min = from m in db.Comments.OrderBy(cv => cv.commentDate) 
+                      where m.postId == id
+                      select m;
+            return View(min.FirstOrDefault());
         }
 
         //

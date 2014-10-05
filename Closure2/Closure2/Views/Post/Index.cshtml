@@ -8,6 +8,15 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
+    @using (Html.BeginForm("Search", "Post", FormMethod.Get))
+    {
+        <p>
+            Text: @Html.TextBox("text")<br />
+            Rating: @Html.DropDownList("rating", "All")<br />
+            Date: @Html.TextBox("date", "1-1-14", "mm-dd-yy");
+            <input type="submit" value="Filter" />
+        </p>
+    }
 </p>
 <table>
     <tr>
@@ -38,6 +47,7 @@
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("First Comment", "First", new { id=item.ID })
         </td>
     </tr>
 }

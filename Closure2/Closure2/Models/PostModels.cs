@@ -15,6 +15,7 @@ namespace Closure2.Models
         public int rating {set; get;}
         public int? prodId { set; get; }
         [DataType(DataType.Date)]
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
         public DateTime postDate { set; get; }
 
         //public virtual ICollection<CommentModels> Comments { get; set; }

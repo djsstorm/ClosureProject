@@ -11,7 +11,6 @@ namespace Closure2.Models
         public int ID { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }
-
         //public virtual ICollection<PostModels> Posts { get; set; }
     }
 

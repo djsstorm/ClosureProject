@@ -17,6 +17,7 @@ namespace Closure2.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        private ClosureDbContext db = new ClosureDbContext();
         //
         // GET: /Account/Login
 
@@ -401,6 +402,13 @@ namespace Closure2.Controllers
                 default:
                     return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
             }
+        }
+
+        public ActionResult ViewStatistics(int id = 0)
+        {
+            var query = from m in db.Posts group m by new { m.postDate.Year };
+            var stat = from m in query select new PostsStatistics { dateOfPost = m.Key.Year, numberOfPosts = m.Count() };
+            return View(stat);
         }
         #endregion
     }
