@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Closure</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <header>
+        <img class="imglogo" src="~/Images/Logo.png" />
+        <!--<section id="login">
+                    @Html.Partial("_LoginPartial")
+                </section>-->
+        <nav>
+            <ul id="menu" class="menu">
+                <li>@Html.ActionLink("About us", "About", "Home")</li>
+                <li>@Html.ActionLink("Gallery", "Gallery", "Home")</li>
+                <li>@Html.ActionLink("Order Now", "Order", "Home")</li>
+                <li>@Html.ActionLink("Reviews", "Reviews", "Home")</li>
+                <li>@Html.ActionLink("Login", "Login", "Account")</li>
+            </ul>
+        </nav>
+
+    </header>
+    <div class="content">
+        <section class="content-wrapper">
+            @RenderSection("featured", required: false)
+
+            @RenderBody()
+        </section>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+<footer>
+    <div class="float-left">
+        <p>&copy; @DateTime.Now.Year - Closure - free you bind</p>
+    </div>
+</footer>
+</html>

@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Gallery";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+<div id="imageContainer">
+    @foreach (var image in (IEnumerable<string>)ViewBag.Images)
+    {
+        <img class="imggallery" src="@Url.Content(image)"/>
+    }
+</div>
+<script src="/Scripts/jquery.min.js"></script>
+<script src="/Scripts/zoomGallery.js"></script>
+
+

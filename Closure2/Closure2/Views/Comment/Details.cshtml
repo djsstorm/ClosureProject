@@ -1,0 +1,29 @@
+﻿@model Closure2.Models.CommentModels
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>CommentModels</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.text)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.text)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.commentDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.commentDate)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

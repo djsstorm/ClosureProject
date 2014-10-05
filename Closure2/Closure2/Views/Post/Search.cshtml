@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Closure2.Models.PostModels>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search a post</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+    @using (Html.BeginForm("Search","Post",FormMethod.Get))
+    {
+        <p>
+            Text: @Html.TextBox("text")<br />
+            Rating: @Html.DropDownList("rating", "All")<br />
+            Date: @Html.TextBox("date","1-1-14","mm-dd-yy");
+            <input type="submit" value="Filter" />
+        </p>
+    }
+</p>
+
+@foreach(var item in Model){
+    @Html.DisplayFor(modelItem => item.text)
+    @Html.DisplayFor(modelItem => item.rating)
+    @Html.DisplayFor(modelItem => item.postDate)
+}

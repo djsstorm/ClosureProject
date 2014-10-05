@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Order";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+<link href="css/bootstrap.min.css" rel="stylesheet"/>
+<script src="/Scripts/js/bootstrap.min.js"></script>
+
+
+<section class="para">
+    <h1>Order Head</h1>
+    <p>Order paragraph</p>
+</section>
+
+<form class="orderForm" name="input" method="get">
+    First Name :
+    <input type="text" name="firstName" />
+    Last Name :
+    <input type="text" name="lastName" />
+    Product ID :
+    <select>
+        <option value="1">Closure</option>
+    </select>
+    Amount :
+    <input type="number" name="amount" />
+    Add Image (Not mandatory) :
+    <input type="file" name="pic" accept="image/*" />
+    <input type="submit" />
+</form>

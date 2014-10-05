@@ -1,0 +1,46 @@
+﻿@model Closure2.Models.Branch
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Branch</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Street)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Street)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.latitude)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.latitude)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.longitude)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.longitude)
+    </div>
+</fieldset>
+<div id="map_canvas" style="width: 100%; height: 728px; margin-bottom: 2px;">
+    var map = new GMap2(document.getElementById('map_canvas'));
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
