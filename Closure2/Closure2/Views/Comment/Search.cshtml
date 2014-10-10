@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Closure2.Models.CommentModels>
+
+@{
+    ViewBag.Title = "Search results";
+}
+
+<h2>Search a comment</h2>
+<div class="TableFormat">
+    <table>
+        <td>Text
+        </td>
+        <td>Comment Date
+        </td>
+        <tr>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>
+                    @Html.DisplayFor(modelItem => item.text)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.commentDate)
+                </th>
+            </tr>
+        }
+    </table>
+</div>
+<br />
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

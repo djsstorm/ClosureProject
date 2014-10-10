@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Closure2.Models.PostsAndComments>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="TableFormat">
+    <table>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.commentText)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.postText)
+            </td>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.commentText)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.postText)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<br />
+<div>
+    @Html.ActionLink("Back to Products", "Index")
+</div>
+
