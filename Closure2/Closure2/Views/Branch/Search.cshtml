@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Closure2.Models.CommentModels>
+﻿@model IEnumerable<Closure2.Models.Branch>
 
 @{
     ViewBag.Title = "Search results";
@@ -19,13 +19,10 @@
         {
             <tr>
                 <th>
-                    @Html.DisplayFor(modelItem => item.text)
+                    @Html.DisplayFor(modelItem => item.Name)
                 </th>
                 <th>
-                    @Html.DisplayFor(modelItem => item.commentDate)
-                </th>
-                <th>
-                    @Html.DisplayFor(modelItem => item.postId)
+                    @Html.DisplayFor(modelItem => item.Street)
                 </th>
             </tr>
         }

@@ -13,11 +13,11 @@
 <h2>Search a post</h2>
 
 <p>
-    @using (Html.BeginForm("Search","Comment",FormMethod.Get))
+    @using (Html.BeginForm("Search", "Comment", FormMethod.Get, new { id = ViewBag.ID }))
     {
         <p>
             Text: @Html.TextBox("text")<br />
-            Date: @Html.TextBox("date","1-1-14","mm-dd-yy");
+            Date: @Html.TextBox("date", "1-1-14", "mm-dd-yy");
             <input type="submit" value="Filter" />
         </p>
     }
@@ -31,6 +31,9 @@
         <th>
             @Html.DisplayNameFor(model => model.commentDate)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postId)
+        </th>
         <th></th>
     </tr>
 
@@ -41,6 +44,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.commentDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postId)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

@@ -16,9 +16,11 @@ namespace Closure2.Controllers
         //
         // GET: /Comment/
 
-        public ActionResult Index()
+        public ActionResult Index(int id = -1)
         {
-            return View(db.Comments.ToList());
+            ViewBag.ID = id;
+            var res = from m in db.Comments.Where(s => s.postId == id) select m;
+            return View(res.ToList());
         }
 
         //
@@ -69,6 +71,22 @@ namespace Closure2.Controllers
         }
 
         //
+        // Post: /Comment/Search
+        // 
+
+        public ActionResult Search(DateTime? date, string text = "", int id = -1)
+        {
+            var commentRes = from m in db.Comments select m;
+            if (id != -1)
+                commentRes = commentRes.Where(s => s.postId == id);
+            if (!String.IsNullOrEmpty(text))
+                commentRes = commentRes.Where(s => s.text.Contains(text));
+            if (date != null)
+                commentRes = commentRes.Where(s => s.commentDate >= date);
+            return View(commentRes);
+        }
+
+        //
         // GET: /Comment/Edit/5
 
         public ActionResult Edit(int id = 0)
@@ -79,17 +97,6 @@ namespace Closure2.Controllers
                 return HttpNotFound();
             }
             return View(commentmodels);
-        }
-
-        public ActionResult Search(DateTime? date, string text = "")
-        {
-            var postsres = from m in db.Comments select m;
-            if (!String.IsNullOrEmpty(text))
-                postsres = postsres.Where(s => s.text.Contains(text));
-            if (date != null)
-                postsres = postsres.Where(s => s.commentDate >= date);
-
-            return View(postsres);
         }
 
         //

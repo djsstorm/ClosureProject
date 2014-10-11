@@ -18,7 +18,46 @@ namespace Closure2.Controllers
 
         public ActionResult Index()
         {
+            var productList = (from m in db.Products select m.Name).ToList();
+            ViewBag.Products = new SelectList(productList, "Name");
+            if (TempData["FilteredBranches"] != null)
+                return View(TempData["FilteredBranches"]);
             return View(db.Branches.ToList());
+        }
+
+        //
+        // Post: /Branch/Search
+
+        public ActionResult Search(DateTime? date, string name = "", int id = -1, string product = "", string street = "")
+        {
+            var branchesRes = from m in db.Branches select m;
+            if (id != -1)
+                branchesRes = branchesRes.Where(s => s.ID == id);
+            if (id != -1)
+                branchesRes = branchesRes.Where(s => s.Name.Equals(name));
+            if (!String.IsNullOrEmpty(product))
+            {
+                foreach (Branch b in branchesRes.ToList())
+                {
+                    bool remove = true;
+                    foreach (ProductModels p in b.Products)
+                    {
+                        if (p.Name.Equals(product))
+                        {
+                            remove = false;
+                            break;
+                        }
+                    }
+                    if (remove)
+                    {
+                        branchesRes = branchesRes.Where(s => s.ID != b.ID);
+                    }
+                }
+            }
+            if (!String.IsNullOrEmpty(street))
+                branchesRes = branchesRes.Where(s => s.Street.Contains(street));
+            TempData["FilteredBranches"] = branchesRes.ToList();
+            return RedirectToAction("Index");
         }
 
         //

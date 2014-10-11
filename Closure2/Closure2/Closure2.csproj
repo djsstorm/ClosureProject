@@ -365,6 +365,8 @@
     <Content Include="Views\Product\NumberOfComments.cshtml" />
     <Content Include="Views\Account\ViewStatistics.cshtml" />
     <Content Include="Views\Account\data.tsv" />
+    <Content Include="Views\Product\Search.cshtml" />
+    <Content Include="Views\Branch\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -402,7 +404,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>3197</DevelopmentServerPort>
+          <DevelopmentServerPort>39731</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:55555/</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>

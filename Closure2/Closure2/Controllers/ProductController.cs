@@ -97,6 +97,20 @@ namespace Closure2.Controllers
         }
 
         //
+        // Post: /Produt/Search
+        public ActionResult Search(int id = -1, string name = "", string desc = "")
+        {
+            var productRes = from m in db.Products select m;
+            if (id != -1)
+                productRes = productRes.Where(s => s.ID == id);
+            if (String.IsNullOrEmpty(name))
+                productRes = productRes.Where(s => s.Name.Equals(name));
+            if (String.IsNullOrEmpty(desc))
+                productRes = productRes.Where(s => s.Description.Contains(desc));
+            return View(productRes);
+        }
+
+        //
         // GET: /Product/Edit/5
 
         public ActionResult Edit(int id = 0)

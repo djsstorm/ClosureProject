@@ -6,9 +6,20 @@
 
 <h2>Index</h2>
 
+<h2>Search a post</h2>
+
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @using (Html.BeginForm("Search", "Branch", FormMethod.Get))
+    {
+        <p>
+            By Product: @Html.DropDownList("product", ViewBag.Products as SelectList, "All")<br />
+            By Name: @Html.TextBox("product")<br />
+            By Street: @Html.TextBox("street")<br />
+            <input type="submit" value="Filter" />
+        </p>
+    }
 </p>
+
 <table>
     <tr>
         <th>

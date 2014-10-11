@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Closure2.Models.ProductModels>
+
+@{
+    ViewBag.Title = "Search results";
+}
+
+<h2>Search a post</h2>
+<div class="TableFormat">
+    <table>
+        <td>ID
+        </td>
+        <td>Name
+        </td>
+        <td>Description
+        </td>
+        <tr>
+        </tr>
+        @foreach (var item in Model)
+        {
+    
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+            </tr>
+        
+        }
+    </table>
+</div>
+<br />
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+            
