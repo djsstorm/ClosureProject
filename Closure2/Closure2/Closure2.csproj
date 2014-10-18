@@ -197,6 +197,7 @@
     <Compile Include="Models\PostsAndComments.cs" />
     <Compile Include="Models\PostsStatistics.cs" />
     <Compile Include="Models\ProductModels.cs" />
+    <Compile Include="Models\ProductsStatistics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -293,6 +294,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\js\bootstrap.js" />
     <Content Include="Scripts\js\bootstrap.min.js" />
+    <Content Include="Scripts\js\d3pie.min.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
@@ -364,9 +366,11 @@
     <Content Include="Views\Product\PostsAndComments.cshtml" />
     <Content Include="Views\Product\NumberOfComments.cshtml" />
     <Content Include="Views\Account\ViewStatistics.cshtml" />
-    <Content Include="Views\Account\data.tsv" />
     <Content Include="Views\Product\Search.cshtml" />
     <Content Include="Views\Branch\Search.cshtml" />
+    <Content Include="Views\Account\PostsNumberStatistics.cshtml" />
+    <Content Include="Views\Account\ProductsRatingStatistics.cshtml" />
+    <Content Include="Views\Account\WebManage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -404,7 +408,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>39731</DevelopmentServerPort>
+          <DevelopmentServerPort>63714</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:55555/</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>

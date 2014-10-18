@@ -12,6 +12,7 @@ namespace Closure2.Models
         public string Description { get; set; }
         public string Name { get; set; }
         //public virtual ICollection<PostModels> Posts { get; set; }
+
     }
 
 }

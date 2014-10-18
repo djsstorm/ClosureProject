@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Closure2.Models;
+using System.Collections;
 
 namespace Closure2.Controllers
 {
@@ -18,6 +19,10 @@ namespace Closure2.Controllers
 
         public ActionResult Index()
         {
+            var branchList = (from m in db.Branches select m.Name).ToList();
+            ViewBag.Branches = new SelectList(branchList, "Name");
+            if (TempData["FilteredBranches"] != null)
+                return View(TempData["FilteredBranches"]);
             if (db.Products == null)
                 return View();
             return View(db.Products.ToList());
@@ -52,16 +57,16 @@ namespace Closure2.Controllers
 
         public ActionResult NumberOfComments(int id = 0)
         {
-          /*  var postsres = from posts in db.Posts
-                           join comments in db.Comments on posts.ID equals comments.postId into t
-                           from x in t group x by new { posts.ID, x.text, posts.prodId } into g
-                           select new CommentsAmounts { postText = g.Key.text, commentsAmount = g.Count(), prodId = g.Key.prodId };
-            */
+            /*  var postsres = from posts in db.Posts
+                             join comments in db.Comments on posts.ID equals comments.postId into t
+                             from x in t group x by new { posts.ID, x.text, posts.prodId } into g
+                             select new CommentsAmounts { postText = g.Key.text, commentsAmount = g.Count(), prodId = g.Key.prodId };
+              */
 
             var query = from posts in db.Posts
                         join comments in db.Comments on posts.ID equals comments.postId into gj
                         from subc in gj.DefaultIfEmpty()
-                        group subc by new { posts.ID, posts.text, posts.prodId, subc.postId} into g
+                        group subc by new { posts.ID, posts.text, posts.prodId, subc.postId } into g
                         select new CommentsAmounts { postText = g.Key.text, commentsAmount = g.Key.postId == null ? 0 : g.Count(), prodId = g.Key.prodId };
 
             query = query.Where(p => p.prodId == id);
@@ -74,7 +79,7 @@ namespace Closure2.Controllers
 
         //
         // GET: /Product/Create
-
+        [Authorize(Roles = "Administrators")]
         public ActionResult Create()
         {
             return View();
@@ -82,7 +87,7 @@ namespace Closure2.Controllers
 
         //
         // POST: /Product/Create
-
+        [Authorize(Roles = "Administrators")]
         [HttpPost]
         public ActionResult Create(ProductModels productmodels)
         {
@@ -98,21 +103,38 @@ namespace Closure2.Controllers
 
         //
         // Post: /Produt/Search
-        public ActionResult Search(int id = -1, string name = "", string desc = "")
+        public ActionResult Search(int id = -1, string name = "", string desc = "", string branchName = "All")
         {
             var productRes = from m in db.Products select m;
+            if (!String.IsNullOrEmpty(branchName) && !branchName.Equals("All"))
+            {
+                var branchRes = from b in db.Branches where b.Name.Equals(branchName) select b;
+                int[] productIDs = null;
+                foreach (Branch b in branchRes.ToList())
+                {
+                    // The filter above is using case-senstivie for some reason.
+                    if (!b.Name.Equals(branchName))
+                        continue;
+                    productIDs = new int[b.Products.Count()];
+                    for (int i = 0; i < productIDs.Count(); i++)
+                        productIDs[i] = b.Products.ElementAt(i).ID;
+                }
+                if (productIDs != null)
+                    productRes = from p in db.Products where productIDs.Contains(p.ID) select p;
+            }
             if (id != -1)
                 productRes = productRes.Where(s => s.ID == id);
-            if (String.IsNullOrEmpty(name))
+            if (!String.IsNullOrEmpty(name))
                 productRes = productRes.Where(s => s.Name.Equals(name));
-            if (String.IsNullOrEmpty(desc))
+            if (!String.IsNullOrEmpty(desc))
                 productRes = productRes.Where(s => s.Description.Contains(desc));
-            return View(productRes);
+            TempData["FilteredBranches"] = productRes.ToList();
+            return RedirectToAction("Index");
         }
 
         //
         // GET: /Product/Edit/5
-
+        [Authorize(Roles = "Administrators")]
         public ActionResult Edit(int id = 0)
         {
             ProductModels productmodels = db.Products.Find(id);
@@ -125,7 +147,7 @@ namespace Closure2.Controllers
 
         //
         // POST: /Product/Edit/5
-
+        [Authorize(Roles = "Administrators")]
         [HttpPost]
         public ActionResult Edit(ProductModels productmodels)
         {
@@ -140,7 +162,7 @@ namespace Closure2.Controllers
 
         //
         // GET: /Product/Delete/5
-
+        [Authorize(Roles = "Administrators")]
         public ActionResult Delete(int id = 0)
         {
             ProductModels productmodels = db.Products.Find(id);
@@ -153,7 +175,7 @@ namespace Closure2.Controllers
 
         //
         // POST: /Product/Delete/5
-
+        [Authorize(Roles = "Administrators")]
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {

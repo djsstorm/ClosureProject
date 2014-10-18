@@ -22,6 +22,8 @@ namespace Closure2.Controllers
             for (int i = 1; i < 6; i++)
                 GenreLst.Add(i);
             ViewBag.rating = new SelectList(GenreLst);
+            if (TempData["FilteredPosts"] != null)
+                return View(TempData["FilteredPosts"]);
             if (db.Posts == null)
                 return View();
             return View(db.Posts.ToList());
@@ -42,7 +44,7 @@ namespace Closure2.Controllers
 
         //
         // GET: /Post/Create
-
+        [Authorize(Roles = "Administrators,Users")]
         public ActionResult Create(int id = -1)
         {
             if (id == -1)
@@ -57,7 +59,7 @@ namespace Closure2.Controllers
 
         //
         // POST: /Post/Create
-
+        [Authorize(Roles = "Administrators,Users")]
         [HttpPost]
         public ActionResult Create(PostModels postmodels)
         {
@@ -77,7 +79,7 @@ namespace Closure2.Controllers
 
         //
         // GET: /Post/Edit/5
-
+        [Authorize(Roles = "Administrators,Users")]
         public ActionResult Edit(int id = 0)
         {
             PostModels postmodels = db.Posts.Find(id);
@@ -90,7 +92,7 @@ namespace Closure2.Controllers
 
         //
         // POST: /Post/Edit/5
-
+        [Authorize(Roles = "Administrators,Users")]
         [HttpPost]
         public ActionResult Edit(PostModels postmodels)
         {
@@ -104,7 +106,7 @@ namespace Closure2.Controllers
         }
 
         //
-        // GET: /Post/Search
+        // Post: /Post/Search
 
         public ActionResult Search(DateTime? date, int rating = 0, string text = "")
         {          
@@ -116,8 +118,8 @@ namespace Closure2.Controllers
                 postsres = postsres.Where(s => s.postDate >= date);
             if (rating >= 1 && rating <= 5)
                 postsres = postsres.Where(s => s.rating >= rating);
-
-            return View(postsres);
+            TempData["FilteredPosts"] = postsres.ToList();
+            return RedirectToAction("Index");
         }
 
         public ActionResult First(int id = 0)
@@ -132,7 +134,7 @@ namespace Closure2.Controllers
 
         //
         // GET: /Post/Delete/5
-
+        [Authorize(Roles = "Administrators,Users")]
         public ActionResult Delete(int id = 0)
         {
             PostModels postmodels = db.Posts.Find(id);
@@ -145,7 +147,7 @@ namespace Closure2.Controllers
 
         //
         // POST: /Post/Delete/5
-
+        [Authorize(Roles = "Administrators,Users")]
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {

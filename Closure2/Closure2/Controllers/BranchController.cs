@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Closure2.Models;
+using System.Collections;
 
 namespace Closure2.Controllers
 {
@@ -33,7 +34,7 @@ namespace Closure2.Controllers
             var branchesRes = from m in db.Branches select m;
             if (id != -1)
                 branchesRes = branchesRes.Where(s => s.ID == id);
-            if (id != -1)
+            if (!String.IsNullOrEmpty(name))
                 branchesRes = branchesRes.Where(s => s.Name.Equals(name));
             if (!String.IsNullOrEmpty(product))
             {
@@ -76,6 +77,7 @@ namespace Closure2.Controllers
         //
         // GET: /Branch/Create
 
+        [Authorize(Roles = "Administrators")]
         public ActionResult Create()
         {
             return View();
@@ -85,6 +87,7 @@ namespace Closure2.Controllers
         // POST: /Branch/Create
 
         [HttpPost]
+        [Authorize(Roles = "Administrators")]
         public ActionResult Create(Branch branch)
         {
             if (ModelState.IsValid)
@@ -99,7 +102,7 @@ namespace Closure2.Controllers
 
         //
         // GET: /Branch/Edit/5
-
+        [Authorize(Roles = "Administrators")]
         public ActionResult Edit(int id = 0)
         {
             Branch branch = db.Branches.Find(id);
@@ -114,6 +117,7 @@ namespace Closure2.Controllers
         // POST: /Branch/Edit/5
 
         [HttpPost]
+        [Authorize(Roles = "Administrators")]
         public ActionResult Edit(Branch branch)
         {
             if (ModelState.IsValid)
@@ -127,7 +131,7 @@ namespace Closure2.Controllers
 
         //
         // GET: /Branch/Delete/5
-
+        [Authorize(Roles = "Administrators")]
         public ActionResult Delete(int id = 0)
         {
             Branch branch = db.Branches.Find(id);
@@ -140,7 +144,7 @@ namespace Closure2.Controllers
 
         //
         // POST: /Branch/Delete/5
-
+        [Authorize(Roles = "Administrators")]
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {

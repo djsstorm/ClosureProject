@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "WebManage";
+}
+<h2>WebManage</h2>
+
+<section id="webSiteManagement">
+    <div id="Options">
+        <button type="button" onclick="window.location.href='@Url.Action("PostsNumberStatistics")'">Post Number Statistics</button>
+        <button type="button" onclick="window.location.href='@Url.Action("ProductsRatingStatistics")'">Product Rating Statistics</button>
+    </div>
+    <div id="GraphOutput">
+
+    </div>
+</section>

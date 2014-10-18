@@ -1,28 +1,25 @@
 ﻿@model IEnumerable<Closure2.Models.CommentModels>
-
 @{
     ViewBag.Title = "Index";
 }
-
 <h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
-<h2>Search a post</h2>
-
-<p>
-    @using (Html.BeginForm("Search", "Comment", FormMethod.Get, new { id = ViewBag.ID }))
-    {
-        <p>
-            Text: @Html.TextBox("text")<br />
-            Date: @Html.TextBox("date", "1-1-14", "mm-dd-yy");
-            <input type="submit" value="Filter" />
-        </p>
-    }
-</p>
-
+@if (User.IsInRole("Administrators") || User.IsInRole("Users"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>}
+<div class="filter">
+    <p>
+        @using (Html.BeginForm("Search", "Comment", FormMethod.Get, new { id = ViewBag.ID }))
+        {
+            <p>
+                Text: @Html.TextBox("text")<br />
+                Date: @Html.TextBox("date", "1-1-14", "mm-dd-yy")<br />
+            <input type="submit" value="Filter" class="button"/>
+            </p>
+        }
+    </p>
+</div>
 <table>
     <tr>
         <th>
@@ -37,23 +34,28 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.text)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.commentDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.postId)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.commentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.postId)
+            </td>
+            <td>
+                @if (User.IsInRole("Administrators") || User.IsInRole("Users"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID });
+                    <text>|</text>
+                    @Html.ActionLink("Create", "Create", new { id = item.ID }) 
+                    <text>|</text>}
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>

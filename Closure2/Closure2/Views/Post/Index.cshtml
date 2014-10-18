@@ -1,23 +1,24 @@
 ﻿@model IEnumerable<Closure2.Models.PostModels>
-
 @{
     ViewBag.Title = "Index";
 }
-
 <h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-    @using (Html.BeginForm("Search", "Post", FormMethod.Get))
-    {
-        <p>
-            Text: @Html.TextBox("text")<br />
-            Rating: @Html.DropDownList("rating", "All")<br />
-            Date: @Html.TextBox("date", "1-1-14", "mm-dd-yy");
-            <input type="submit" value="Filter" />
-        </p>
-    }
-</p>
+<div class="filter">
+    <p>
+        @using (Html.BeginForm("Search", "Post", FormMethod.Get))
+        {
+            <p>
+                Rating: @Html.DropDownList("rating", "All")<br />
+                Text: @Html.TextBox("text")<br />
+                Date: @Html.TextBox("date", "1-1-14", "mm-dd-yy")<br />
+                <input type="submit" value="Filter" class="button"/>
+            </p>
+        }
+    </p>
+</div>
+@if (User.IsInRole("Administrators") || User.IsInRole("Users"))
+{
+    @Html.ActionLink("Create New", "Create")}
 <table>
     <tr>
         <th>
@@ -32,24 +33,29 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.text)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.rating)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.postDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-            @Html.ActionLink("First Comment", "First", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.rating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.postDate)
+            </td>
+            <td>
+                @if (User.IsInRole("Administrators") || User.IsInRole("Users"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID });
+                    <text>|</text>
+                    @Html.ActionLink("Create", "Create", new { id = item.ID }) 
+                    <text>|</text>}
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("First Comment", "First", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>

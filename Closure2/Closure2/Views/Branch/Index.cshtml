@@ -1,24 +1,25 @@
 ﻿@model IEnumerable<Closure2.Models.Branch>
-
 @{
     ViewBag.Title = "Index";
 }
-
 <h2>Index</h2>
+<h2>Search a Branch</h2>
 
-<h2>Search a post</h2>
-
-<p>
+<div class="filter">
     @using (Html.BeginForm("Search", "Branch", FormMethod.Get))
     {
-        <p>
-            By Product: @Html.DropDownList("product", ViewBag.Products as SelectList, "All")<br />
-            By Name: @Html.TextBox("product")<br />
-            By Street: @Html.TextBox("street")<br />
-            <input type="submit" value="Filter" />
-        </p>
+        <text>
+        By Product: @Html.DropDownList("product", ViewBag.Products as SelectList, "All")<br />
+        By Name: @Html.TextBox("product")<br />
+        By Street: @Html.TextBox("street")<br />
+        </text>
+        <input type="submit" value="Filter" class="button" />
     }
-</p>
+</div>
+
+@if (User.IsInRole("Administrators"))
+{
+    @Html.ActionLink("Add new branch", "Create")}
 
 <table>
     <tr>
@@ -37,25 +38,31 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Street)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.latitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.longitude)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Street)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.latitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.longitude)
+            </td>
+            <td>
+                @if (User.IsInRole("Administrators"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID });
+                    <text>|</text>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID });
+                    <text>|</text>
+                }
+                @Html.ActionLink("Details", "Details", new { id = item.ID })
+            </td>
+        </tr>
+    }
 </table>

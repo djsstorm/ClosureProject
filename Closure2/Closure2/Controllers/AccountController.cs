@@ -55,7 +55,7 @@ namespace Closure2.Controllers
         {
             WebSecurity.Logout();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("About", "Home");
         }
 
         //
@@ -81,8 +81,9 @@ namespace Closure2.Controllers
                 try
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                    Roles.AddUserToRole(model.UserName,"Users");
                     WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("About", "Home");
                 }
                 catch (MembershipCreateUserException e)
                 {
@@ -338,7 +339,7 @@ namespace Closure2.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("About", "Home");
             }
         }
 
@@ -404,11 +405,34 @@ namespace Closure2.Controllers
             }
         }
 
-        public ActionResult ViewStatistics(int id = 0)
+        [Authorize(Roles = "Administrators")]
+        public ActionResult PostsNumberStatistics(int id = 0)
         {
             var query = from m in db.Posts group m by new { m.postDate.Year };
             var stat = from m in query select new PostsStatistics { dateOfPost = m.Key.Year, numberOfPosts = m.Count() };
             return View(stat);
+        }
+
+        [Authorize(Roles = "Administrators")]
+        public ActionResult ProductsRatingStatistics(int id = 1)
+        {
+            var productList = (from m in db.Products select m).ToList();
+            ViewBag.Products = productList;
+            var query = from posts in db.Posts
+                        where posts.prodId == id
+                        join post in db.Posts on posts.ID equals post.ID into gj
+                        from subc in gj.DefaultIfEmpty()
+                        orderby subc.rating
+                        group subc by new { posts.prodId, posts.rating } into g
+                        select new ProductsStatistics { numberOfPosts = g.Key.prodId == null ? 0 : g.Count(), Rating = g.Key.rating };
+            var prodName = from prod in db.Products where prod.ID == id select prod.Name;
+            ViewBag.prodName = prodName.ToString();
+            return View(query);
+        }
+        [Authorize(Roles = "Administrators")]
+        public ActionResult WebManage()
+        {
+            return View();
         }
         #endregion
     }

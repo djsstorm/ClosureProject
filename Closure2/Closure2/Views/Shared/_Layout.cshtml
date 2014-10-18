@@ -5,7 +5,7 @@
     <title>Closure</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
-     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -20,26 +20,67 @@
                 <li>@Html.ActionLink("About us", "About", "Home")</li>
                 <li>@Html.ActionLink("Gallery", "Gallery", "Home")</li>
                 <li>@Html.ActionLink("Order Now", "Order", "Home")</li>
-                <li>@Html.ActionLink("Reviews", "Reviews", "Home")</li>
-                <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                <li>@Html.ActionLink("Products", "Index", "Product")</li>
+
+                <li>@if (Request.IsAuthenticated)
+                    { 
+                    @Html.AntiForgeryToken()
+                    @Html.Partial("_LoginPartial")
+                    }
+                    else
+                    {@Html.ActionLink("Login", "Login", "Account");
+                    }
+
+                </li>
             </ul>
         </nav>
-
     </header>
     <div class="content">
-        <section class="content-wrapper">
+        <aside id="asideFilter">
+            <section id ="asideFilterSection">
+                <header>
+                    <h3>Filter</h3>
+                </header>
+                <div class="filterContent"></div>
+            </section>
+        </aside>
+        <section class="mainContent">
             @RenderSection("featured", required: false)
-
             @RenderBody()
         </section>
-    </div>
+        <aside id="asideAdv">
+            <section>
+                <header>
+                    <h3>Advertisements Area</h3>
+                </header>
+                <canvas id="myCanvas" width="178" height="100"></canvas>
+                <script>
+                    var c = document.getElementById("myCanvas");
+                    var ctx = c.getContext("2d");
+                    ctx.font = "25px Arial";
+                    ctx.strokeText("Click Me", 10, 50);
+                </script>
 
+            </section>
+        </aside>
+    </div>
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
 </body>
+
 <footer>
     <div class="float-left">
         <p>&copy; @DateTime.Now.Year - Closure - free you bind</p>
     </div>
 </footer>
+<script src="/Scripts/jquery.min.js"></script>
+<script>
+    var i = $("div.filterContent");
+    var d = $('div.filter');
+    if (!d.length)
+        $("section#asideFilterSection").hide();
+    else
+        i.replaceWith(d)
+</script>
+
 </html>

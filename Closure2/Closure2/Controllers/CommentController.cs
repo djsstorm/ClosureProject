@@ -39,6 +39,7 @@ namespace Closure2.Controllers
         //
         // GET: /Comment/Create
 
+        [Authorize(Roles = "Administrators,Users")]
         public ActionResult Create(int id = -1)
         {
             if (id == -1)
@@ -55,6 +56,7 @@ namespace Closure2.Controllers
         // POST: /Comment/Create
 
         [HttpPost]
+        [Authorize(Roles = "Administrators,Users")]
         public ActionResult Create(CommentModels commentmodels)
         {
             if (db.Posts.Find(commentmodels.postId) == null)
@@ -88,7 +90,7 @@ namespace Closure2.Controllers
 
         //
         // GET: /Comment/Edit/5
-
+        [Authorize(Roles = "Administrators,Users")]
         public ActionResult Edit(int id = 0)
         {
             CommentModels commentmodels = db.Comments.Find(id);
@@ -103,6 +105,7 @@ namespace Closure2.Controllers
         // POST: /Comment/Edit/5
 
         [HttpPost]
+        [Authorize(Roles = "Administrators,Users")]
         public ActionResult Edit(CommentModels commentmodels)
         {
             if (ModelState.IsValid)
@@ -116,7 +119,7 @@ namespace Closure2.Controllers
 
         //
         // GET: /Comment/Delete/5
-
+        [Authorize(Roles = "Administrators,Users")]
         public ActionResult Delete(int id = 0)
         {
             CommentModels commentmodels = db.Comments.Find(id);
@@ -129,7 +132,7 @@ namespace Closure2.Controllers
 
         //
         // POST: /Comment/Delete/5
-
+        [Authorize(Roles = "Administrators,Users")]
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {

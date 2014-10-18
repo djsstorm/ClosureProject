@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Closure2.Models.ProductsStatistics>
+@{
+    List<Closure2.Models.ProductModels> productList = ViewBag.Products;
+    SelectList listOfProducts = new SelectList(productList, "ID", "Name");
+}
+<script src="/Scripts/jquery.min.js"></script>
+<div class="filter">
+    By Product: @Html.DropDownList("ProductsIDs", listOfProducts)<br />
+    <button type="button" class="showStatistics">Product Rating Statistics</button>
+
+    <script>$(".showStatistics").click(function(){
+    window.location.href = "/Account/ProductsRatingStatistics/"+$("#ProductsIDs option:selected").val();
+});</script>
+</div>
+
+<div id="pieChart"></div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.4/d3.min.js"></script>
+<script src="/Scripts/js/d3pie.min.js"></script>
+<script>
+    var pie = new d3pie("pieChart", {
+        "header": {
+            "title": {
+                "text": "Product Rating",
+                "fontSize": 24,
+                "font": "open sans"
+            },
+            "subtitle": {
+                "text": "A full pie chart to show rating per product",
+                "color": "#999999",
+                "fontSize": 12,
+                "font": "open sans"
+            },
+            "titleSubtitlePadding": 9
+        },
+        "footer": {
+            "color": "#999999",
+            "fontSize": 10,
+            "font": "open sans",
+            "location": "bottom-left"
+        },
+        "size": {
+            "canvasWidth": 590
+        },
+        "data": {
+            "content": [
+                @foreach (var item in Model.ToList())
+                {
+                    <text>
+                    {
+                        "label": "Rating @item.Rating.ToString()",
+                        "value": @item.numberOfPosts,
+                        "color": "#2384c1"
+                    },
+                    </text>
+                }
+            ]
+        },
+        "labels": {
+            "outer": {
+                "pieDistance": 32
+            },
+            "inner": {
+                "format": "value",
+                "hideWhenLessThanPercentage": 3
+            },
+            "mainLabel": {
+                "fontSize": 11
+            },
+            "percentage": {
+                "color": "#ffffff",
+                "decimalPlaces": 0
+            },
+            "value": {
+                "color": "#adadad",
+                "fontSize": 11
+            },
+            "lines": {
+                "enabled": true
+            }
+        },
+        "effects": {
+            "pullOutSegmentOnClick": {
+                "effect": "linear",
+                "speed": 400,
+                "size": 8
+            }
+        },
+        "misc": {
+            "gradient": {
+                "enabled": true,
+                "percentage": 100
+            }
+        },
+        "callbacks": {
+            "onMouseoverSegment": null,
+            "onMouseoutSegment": null
+        }
+    });
+</script>
