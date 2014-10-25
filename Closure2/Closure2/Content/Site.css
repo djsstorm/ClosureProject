@@ -290,16 +290,15 @@ aside section {
 }
 
 @font-face {
-    font-family: myfont;
-    src: url("~/Fonts/myFont.ttf") format('truetype');
-    /*src: url(http://www.font-face.com/fonts/delicious/Delicious-Roman.otf);*/
+    font-family: DudiAndSagi;
+    src: url("/Fonts/myFont.ttf");
 }
 
-.closureInfo {
+div.closureInfo {
     -webkit-column-count: 2; /* Chrome, Safari, Opera */
     -moz-column-count: 2; /* Firefox */
     column-count: 2;
-    font-family: myfont;
+    font-family: DudiAndSagi;
     border: 2px solid #a1a1a1;
     padding: 10px 40px;
     background: #dddddd;

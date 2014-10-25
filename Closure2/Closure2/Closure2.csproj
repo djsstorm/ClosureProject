@@ -268,6 +268,7 @@
     <Content Include="Scripts\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Scripts\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Fonts\myFont.ttf" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Images\Gallery\headswt front with logo place.jpg" />
     <Content Include="Images\Logo.png" />
@@ -410,7 +411,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>24240</DevelopmentServerPort>
+          <DevelopmentServerPort>32708</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:55555/</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
