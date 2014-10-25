@@ -202,6 +202,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />
+    <Content Include="Content\styles.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -258,6 +259,10 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\css\bootstrap-theme.css" />
+    <Content Include="Scripts\css\bootstrap-theme.min.css" />
+    <Content Include="Scripts\css\bootstrap.css" />
+    <Content Include="Scripts\css\bootstrap.min.css" />
     <Content Include="Scripts\css\bootstrap-theme.css.map" />
     <Content Include="Scripts\css\bootstrap.css.map" />
     <Content Include="Scripts\fonts\glyphicons-halflings-regular.eot" />
@@ -275,10 +280,6 @@
     <Content Include="Images\Gallery\headswt front with smily - cool.jpg" />
     <Content Include="Images\Gallery\headswt front with smily - excited.jpg" />
     <Content Include="Images\Gallery\headswt front with smily - loved.jpg" />
-    <Content Include="Scripts\css\bootstrap-theme.css" />
-    <Content Include="Scripts\css\bootstrap-theme.min.css" />
-    <Content Include="Scripts\css\bootstrap.css" />
-    <Content Include="Scripts\css\bootstrap.min.css" />
     <Content Include="Scripts\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -298,6 +299,7 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\script.js" />
     <Content Include="Scripts\zoomGallery.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -408,7 +410,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>63714</DevelopmentServerPort>
+          <DevelopmentServerPort>24240</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:55555/</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>

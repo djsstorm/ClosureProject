@@ -6,26 +6,25 @@
 }
 
 /* Tell the browser to render HTML 5 elements as block */
-header, footer, nav, article {
+header, footer, nav {
     display: block;
     height: 5%;
 }
 
-html {
+html, body {
     overflow: hidden;
+    overflow-y: hidden;
+    overflow-x: hidden;
     height: 100%;
     width: 100%;
 }
 
 body {
-    display:block;
+    position: fixed;
     margin: 0 auto;
     padding: 22px 0;
-    width: inherit;
     font: 13px/22px Helvetica, Arial, sans-serif;
-    background: #F0F0F0;
-    height: 80%;
-    text-align:center;
+    text-align: center;
 }
 
 h1 {
@@ -44,10 +43,6 @@ h3 {
     padding: 11px 0;
 }
 
-p {
-    padding-bottom: 22px;
-}
-
 /* Used for blog paragraphs */
 bp {
     padding-bottom: 22px;
@@ -61,11 +56,10 @@ bp {
 }
 
 .imglogo {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    position: fixed;
     width: 400px;
     height: 120px;
+    right: 40%;
 }
 
 div#imageContainer {
@@ -76,154 +70,26 @@ div#imageContainer {
 }
 
 .content {
+    position: relative;
     width: inherit;
-    height: 80%;
-    margin: 165px auto;
-    overflow: scroll;
+    margin: 165px;
+    height: 100%;
     margin-left: auto;
     margin-right: auto;
+    overflow: hidden;
 }
 
 .mainContent {
-    margin-left: auto;
+    position: relative;
+    margin-left: 20%;
     margin-right: auto;
-    display: table-cell;
+    display: block;
+    height: 73%;
     text-align: center;
     vertical-align: middle;
-    overflow: auto;
-    width: 80%;
+    overflow: scroll;
+    width: 60%;
 }
-
-.button {
-    width: 150px;
-    text-align: center;
-    vertical-align: middle;
-    margin: 0 auto;
-}
-/*
-    Tables Format
-    */
-
-.TableFormat {
-    margin: 0px;
-    padding: 0px;
-    width: inherit;
-    box-shadow: 10px 10px 5px #888888;
-    border: 1px solid #000000;
-    -moz-border-radius-bottomleft: 0px;
-    -webkit-border-bottom-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-    -moz-border-radius-bottomright: 0px;
-    -webkit-border-bottom-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    -moz-border-radius-topright: 0px;
-    -webkit-border-top-right-radius: 0px;
-    border-top-right-radius: 0px;
-    -moz-border-radius-topleft: 0px;
-    -webkit-border-top-left-radius: 0px;
-    border-top-left-radius: 0px;
-}
-
-    .TableFormat table {
-        border-collapse: collapse;
-        border-spacing: 0;
-        width: 100%;
-        height: 100%;
-        margin: 0px;
-        padding: 0px;
-    }
-
-    .TableFormat tr:last-child td:last-child {
-        -moz-border-radius-bottomright: 0px;
-        -webkit-border-bottom-right-radius: 0px;
-        border-bottom-right-radius: 0px;
-    }
-
-    .TableFormat table tr:first-child td:first-child {
-        -moz-border-radius-topleft: 0px;
-        -webkit-border-top-left-radius: 0px;
-        border-top-left-radius: 0px;
-    }
-
-    .TableFormat table tr:first-child td:last-child {
-        -moz-border-radius-topright: 0px;
-        -webkit-border-top-right-radius: 0px;
-        border-top-right-radius: 0px;
-    }
-
-    .TableFormat tr:last-child td:first-child {
-        -moz-border-radius-bottomleft: 0px;
-        -webkit-border-bottom-left-radius: 0px;
-        border-bottom-left-radius: 0px;
-    }
-
-    .TableFormat tr:hover td {
-    }
-
-    .TableFormat tr:nth-child(odd) {
-        background-color: #aad4ff;
-    }
-
-    .TableFormat tr:nth-child(even) {
-        background-color: #ffffff;
-    }
-
-    .TableFormat td {
-        vertical-align: middle;
-        border: 1px solid #000000;
-        border-width: 0px 1px 1px 0px;
-        text-align: left;
-        padding: 7px;
-        font-size: 15px;
-        font-family: Courier;
-        font-weight: normal;
-        color: #000000;
-    }
-
-    .TableFormat tr:last-child td {
-        border-width: 0px 1px 0px 0px;
-    }
-
-    .TableFormat tr td:last-child {
-        border-width: 0px 0px 1px 0px;
-    }
-
-    .TableFormat tr:last-child td:last-child {
-        border-width: 0px 0px 0px 0px;
-    }
-
-    .TableFormat tr:first-child td {
-        background: -o-linear-gradient(bottom, #005fbf 5%, #003f7f 100%);
-        background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #005fbf), color-stop(1, #003f7f) );
-        background: -moz-linear-gradient( center top, #005fbf 5%, #003f7f 100% );
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#005fbf", endColorstr="#003f7f");
-        background: -o-linear-gradient(top,#005fbf,003f7f);
-        background-color: #005fbf;
-        border: 0px solid #000000;
-        text-align: center;
-        border-width: 0px 0px 1px 1px;
-        font-size: 14px;
-        font-family: Comic Sans MS;
-        font-weight: bold;
-        color: #ffffff;
-    }
-
-    .TableFormat tr:first-child:hover td {
-        background: -o-linear-gradient(bottom, #005fbf 5%, #003f7f 100%);
-        background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #005fbf), color-stop(1, #003f7f) );
-        background: -moz-linear-gradient( center top, #005fbf 5%, #003f7f 100% );
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#005fbf", endColorstr="#003f7f");
-        background: -o-linear-gradient(top,#005fbf,003f7f);
-        background-color: #005fbf;
-    }
-
-    .TableFormat tr:first-child td:first-child {
-        border-width: 0px 0px 1px 0px;
-    }
-
-    .TableFormat tr:first-child td:last-child {
-        border-width: 0px 0px 1px 1px;
-    }
 
 /*
     About Page
@@ -263,51 +129,7 @@ div#map_canvas {
     */
 
 
-/*------------------------------
-=NAVIGATION
-------------------------------*/
 
-nav {
-    top: 150px;
-    position: fixed;
-    left: 0;
-    width: 100%;
-    /*background: url("../Content/themes/images/nav_background.png");*/
-    background: -webkit-linear-gradient(left, #303030, #303030); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(right, #303030, #303030); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(right, #303030, #303030); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to right, #303030, #303030); /* Standard syntax */
-}
-
-    nav ul {
-        margin: 0 auto;
-        width: 940px;
-        list-style: none;
-    }
-
-        nav ul li {
-            float: left;
-        }
-
-            nav ul li a {
-                display: block;
-                margin-right: 20px;
-                width: 140px;
-                font-size: 14px;
-                line-height: 44px;
-                text-align: center;
-                text-decoration: none;
-                color: #777;
-            }
-
-                nav ul li a:hover {
-                    color: #fff;
-                }
-
-
-            nav ul li.selected a {
-                color: #fff;
-            }
 
 /*------------------------------
 =BLOG POST
@@ -388,59 +210,12 @@ nav {
         }
 
 
-
-
-
-/*------------------------------
-=COMMENT FORM
-------------------------------*/
-form.comment {
-    margin-top: 21px;
-    padding-top: 22px;
-    border-top: 1px solid #d7d7d7;
-}
-
-form p {
-    display: table;
-    margin-bottom: 22px;
-    padding: 0 22px;
-}
-
-form label {
-    display: table-cell;
-    width: 140px;
-    padding-right: 20px;
-    text-align: right;
-    font-weight: bold;
-    vertical-align: top;
-}
-
-form input[type="text"], form input[type="email"], form input[type="url"] {
-    display: table-cell;
-    width: 300px;
-    height: 20px;
-    border: 1px solid #d7d7d7;
-}
-
-form textarea {
-    width: 300px;
-    height: 100px;
-    border: 1px solid #d7d7d7;
-}
-
-form input[type="submit"] {
-    margin-left: 162px;
-}
-
-
-
 /*------------------------------
 =FOOTER
 ------------------------------*/
 footer {
     width: 100%;
-    height: 60px;
-    background: red;
+    height: 5%;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -455,76 +230,79 @@ footer {
         color: #777;
     }
 
-        footer div section {
-            display: table-cell;
-            width: 300px;
-        }
-
-        footer div #about, footer div #blogroll {
-            padding-right: 20px;
-        }
-
-    footer h3 {
-        color: #FFF;
-    }
-
-    footer a {
-        color: #999;
-    }
-
-        footer a:hover {
-            color: #FFF;
-            text-decoration: none;
-        }
-
-    footer ul {
-        margin: 0 0 0 40px;
-        list-style: square;
-        color: #565656;
-    }
-
-        footer ul li a {
-            display: block;
-        }
-
-
-
-
 /*------------------------------
 SIDEBAR LAYOUT
 ------------------------------*/
 aside {
-    display: table-cell;
+    display: block;
+    height: 100%;
 }
 
 #asideAdv {
     float: right;
+    width: 10%;
 }
 
+    #asideAdv section header {
+        float: right;
+        height:auto;
+        background: red;
+        -webkit-transition: background-color 2s ease-out;
+        -moz-transition: background-color 2s ease-out;
+        -o-transition: background-color 2s ease-out;
+        transition: background-color 2s ease-out;
+    }
+
+        #asideAdv section header:hover {
+            background-color: orange;
+            cursor: pointer;
+        }
+
 #asideFilter {
+    position: fixed;
+    width: 20%;
     float: left;
 }
 
 .filter {
     text-align: center;
-
 }
-    /*------------------------------
+
+.filterContent {
+}
+/*------------------------------
 =SIDEBAR
 ------------------------------*/
-    aside section {
-        margin: 22px 0 0 22px;
+aside section {
+    margin: 22px 0 0 22px;
+    /*background: url("../Content/themes/images/sidebar_section_background.png") repeat-x;*/
+    background: #d6d6d6; /* Old browsers */
+    background: -moz-linear-gradient(top, #d6d6d6 32%, #ffffff 98%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(32%,#d6d6d6), color-stop(98%,#ffffff)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #d6d6d6 32%,#ffffff 98%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #d6d6d6 32%,#ffffff 98%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #d6d6d6 32%,#ffffff 98%); /* IE10+ */
+    background: linear-gradient(to bottom, #d6d6d6 32%,#ffffff 98%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6d6d6', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+    /* Border-radius not implemented yet */
+    -moz-border-radius: 11px;
+    -webkit-border-radius: 11px;
+}
 
-        /*background: url("../Content/themes/images/sidebar_section_background.png") repeat-x;*/
-        background: #d6d6d6; /* Old browsers */
-        background: -moz-linear-gradient(top, #d6d6d6 32%, #ffffff 98%); /* FF3.6+ */
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(32%,#d6d6d6), color-stop(98%,#ffffff)); /* Chrome,Safari4+ */
-        background: -webkit-linear-gradient(top, #d6d6d6 32%,#ffffff 98%); /* Chrome10+,Safari5.1+ */
-        background: -o-linear-gradient(top, #d6d6d6 32%,#ffffff 98%); /* Opera 11.10+ */
-        background: -ms-linear-gradient(top, #d6d6d6 32%,#ffffff 98%); /* IE10+ */
-        background: linear-gradient(to bottom, #d6d6d6 32%,#ffffff 98%); /* W3C */
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6d6d6', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
-        /* Border-radius not implemented yet */
-        -moz-border-radius: 11px;
-        -webkit-border-radius: 11px;
-    }
+@font-face {
+    font-family: myfont;
+    src: url("~/Fonts/myFont.ttf") format('truetype');
+    /*src: url(http://www.font-face.com/fonts/delicious/Delicious-Roman.otf);*/
+}
+
+.closureInfo {
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+    font-family: myfont;
+    border: 2px solid #a1a1a1;
+    padding: 10px 40px;
+    background: #dddddd;
+    width: 80%;
+    border-radius: 25px;
+}

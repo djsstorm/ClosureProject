@@ -2,18 +2,31 @@
 @{
     ViewBag.Title = "Index";
 }
-<h2>Index</h2>
-<h2>Search a Branch</h2>
-
-<div class="filter">
-    @using (Html.BeginForm("Search", "Branch", FormMethod.Get))
+<h2>Branches</h2>
+<div id="filter" class="container">
+    @using (Html.BeginForm("Search", "Branch", FormMethod.Get, new { @class = "form-horizontal", @role = "form" }))
     {
-        <text>
-        By Product: @Html.DropDownList("product", ViewBag.Products as SelectList, "All")<br />
-        By Name: @Html.TextBox("product")<br />
-        By Street: @Html.TextBox("street")<br />
-        </text>
-        <input type="submit" value="Filter" class="button" />
+        <div class="form-group">
+            <label for="product" class="col-sm-1 control-label">Product</label>
+            <div class="col-sm-2 row-fluid">
+                @Html.DropDownList("product", ViewBag.Products as SelectList, "All", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name" class="col-sm-1 control-label">Name</label>
+            <div class="col-sm-2">
+                @Html.TextBox("name", null, new { @class = "form-control", @id="name" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="street" class="col-sm-1 control-label">Street</label>
+            <div class="col-sm-2">
+                @Html.TextBox("street", null, new { @class = "form-control", @id="street"})
+            </div>
+        </div>
+        <div class="col-sm-3">
+        <input type="submit" value="Filter" class="btn btn-default" />
+            </div>
     }
 </div>
 

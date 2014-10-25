@@ -82,15 +82,13 @@
           return "<strong>Number Of Posts:</strong> <span style='color:red'>" + d.NumberOfPosts + "</span>";
       })
 
-    var svg = d3.select("div").append("svg")
+    var svg = d3.select("section.mainContent").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     svg.call(tip);
-
-    //d3.tsv("data.tsv", type, function (error, data) {
     (function () {
         var data = [];
         @foreach (var item in Model)
@@ -135,5 +133,4 @@
         d.NumberOfPosts = +d.NumberOfPosts;
         return d;
     }
-
 </script>

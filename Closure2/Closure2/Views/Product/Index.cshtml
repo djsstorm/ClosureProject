@@ -4,17 +4,31 @@
     ViewBag.Title = "Index";
 }
 <h2>Index</h2>
-<h2>Search a product</h2>
 
-<div class="filter">
-    @using (Html.BeginForm("Search", "Product", FormMethod.Get))
+<div id="filter" class="container">
+    @using (Html.BeginForm("Search", "Product", FormMethod.Get, new { @class = "form-horizontal", @role = "form" }))
     {
-        <p>
-            By Branch: @Html.DropDownList("branchName", ViewBag.Branches as SelectList, "All")<br />
-            By Name: @Html.TextBox("name")<br />
-            By Description: @Html.TextBox("desc")<br />
-            <input type="submit" value="Filter" class="button"/>
-        </p>
+        <div class="form-group">
+            <label for="branchName" class="col-sm-1 control-label">Branch</label>
+            <div class="col-sm-2 row-fluid">
+                @Html.DropDownList("branchName", ViewBag.Branches as SelectList, "All", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name" class="col-sm-1 control-label">Name</label>
+            <div class="col-sm-2">
+                @Html.TextBox("name", null, new { @class = "form-control", @id="name" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="desc" class="col-sm-1 control-label">Description</label>
+            <div class="col-sm-2">
+                @Html.TextBox("desc", null, new { @class = "form-control", @id="desc"})
+            </div>
+        </div>
+        <div class="col-sm-3">
+        <input type="submit" value="Filter" class="btn btn-default" />
+            </div>
     }
 </div>
 @if (User.IsInRole("Administrators"))

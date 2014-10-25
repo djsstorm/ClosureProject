@@ -8,17 +8,26 @@
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>}
-<div class="filter">
-    <p>
-        @using (Html.BeginForm("Search", "Comment", FormMethod.Get, new { id = ViewBag.ID }))
-        {
-            <p>
-                Text: @Html.TextBox("text")<br />
-                Date: @Html.TextBox("date", "1-1-14", "mm-dd-yy")<br />
-            <input type="submit" value="Filter" class="button"/>
-            </p>
-        }
-    </p>
+
+<div id="filter" class="container">
+    @using (Html.BeginForm("Search", "Comment", FormMethod.Get, new { @class = "form-horizontal", @role = "form", id = ViewBag.ID }))
+    {
+        <div class="form-group">
+            <label for="text" class="col-sm-1 control-label">Text</label>
+            <div class="col-sm-2">
+                @Html.TextBox("text", null, new { @class = "form-control", @id="text" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="date" class="col-sm-1 control-label">Date</label>
+            <div class="col-sm-2">
+                @Html.TextBox("date", "1-1-14", "mm-dd-yy",new { @class = "form-control", @id="street"})
+            </div>
+        </div>
+        <div class="col-sm-3">
+        <input type="submit" value="Filter" class="btn btn-default" />
+            </div>
+    }
 </div>
 <table>
     <tr>

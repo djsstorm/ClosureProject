@@ -5,8 +5,10 @@
     <title>Closure</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
+    <script src="/Scripts/jquery.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -15,72 +17,84 @@
         <!--<section id="login">
                     @Html.Partial("_LoginPartial")
                 </section>-->
-        <nav>
-            <ul id="menu" class="menu">
-                <li>@Html.ActionLink("About us", "About", "Home")</li>
-                <li>@Html.ActionLink("Gallery", "Gallery", "Home")</li>
-                <li>@Html.ActionLink("Order Now", "Order", "Home")</li>
-                <li>@Html.ActionLink("Products", "Index", "Product")</li>
-
-                <li>@if (Request.IsAuthenticated)
-                    { 
-                    @Html.AntiForgeryToken()
-                    @Html.Partial("_LoginPartial")
-                    }
-                    else
-                    {@Html.ActionLink("Login", "Login", "Account");
-                    }
-
-                </li>
-            </ul>
+        <!-- Single button -->
+        <nav class="navbar navbar-default navbar" role="navigation">
+            <div class="container-fluid">
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("About us", "About", "Home")</li>
+                        <li>@Html.ActionLink("Gallery", "Gallery", "Home")</li>
+                        <li>@Html.ActionLink("Products", "Index", "Product")</li>
+                        <li>@Html.ActionLink("Branches", "Index", "Branch")</li>
+                        <li>@Html.ActionLink("Reviews", "Index", "Post")</li>
+                    </ul>
+                    <ul class="nav navbar-nav pull-right">
+                        @if (Request.IsAuthenticated)
+                        { 
+                            <li class="dropdown">
+                                @Html.AntiForgeryToken()
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><span>@Html.Partial("_LoginPartial")</span></li>
+                                    <li><a href='/Account/WebManage'><span>Manage</span></a></li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {<li>@Html.ActionLink("Login", "Login", "Account")</li>
+                        }
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
         </nav>
     </header>
     <div class="content">
-        <aside id="asideFilter">
-            <section id ="asideFilterSection">
-                <header>
-                    <h3>Filter</h3>
-                </header>
-                <div class="filterContent"></div>
-            </section>
-        </aside>
-        <section class="mainContent">
-            @RenderSection("featured", required: false)
-            @RenderBody()
-        </section>
         <aside id="asideAdv">
             <section>
                 <header>
                     <h3>Advertisements Area</h3>
                 </header>
-                <canvas id="myCanvas" width="178" height="100"></canvas>
+                <canvas id="AdvCanvas" width="178" height="100"></canvas>
                 <script>
-                    var c = document.getElementById("myCanvas");
+                    var c = document.getElementById("AdvCanvas");
                     var ctx = c.getContext("2d");
                     ctx.font = "25px Arial";
                     ctx.strokeText("Click Me", 10, 50);
                 </script>
-
             </section>
         </aside>
+        <aside id="asideFilter">
+            <header>
+                <h3>Filter</h3>
+            </header>
+            <div id="mainContainer" class="container"></div>
+        </aside>
+        <section class="mainContent">
+            @RenderSection("featured", required: false)
+            @RenderBody()
+        </section>
+
     </div>
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
+    <footer>
+        <div class="float-left">
+            <p>&copy; @DateTime.Now.Year - Closure - free you bind</p>
+        </div>
+    </footer>
 </body>
-
-<footer>
-    <div class="float-left">
-        <p>&copy; @DateTime.Now.Year - Closure - free you bind</p>
-    </div>
-</footer>
-<script src="/Scripts/jquery.min.js"></script>
 <script>
-    var i = $("div.filterContent");
-    var d = $('div.filter');
+    var i = $("div#mainContainer");
+    var d = $('div#filter');
     if (!d.length)
-        $("section#asideFilterSection").hide();
-    else
+        $("aside#asideFilter").hide();
+    else {
         i.replaceWith(d)
+    }
+    $("table").addClass("table");
 </script>
 
 </html>
